@@ -1,10 +1,8 @@
 class ToDo {
     constructor (selector){
         this.mainContainerElement = document.querySelector(selector)
-        this.uiContainer = document.createEelement ('div')
-        this.taskContainer = document.createEelement ('div')
-        this.mainContainerElement.appendChild(this.uiContainer)
-        this.mainContainerElement.appendChild(this.taskContainer)
+        this.uiContainer = null
+        this.taskContainer = null
 
         this.task = [
             {
@@ -13,7 +11,7 @@ class ToDo {
             }
         ]
 
-        this.render()
+        this.init()
     }
 
     init() {
