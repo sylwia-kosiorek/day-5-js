@@ -7,7 +7,7 @@ class ToDo {
         this.isloading = false
         this.task = [
             {
-                taskName: 'Wyniesc smieci',
+                taskName: 'Learn JS',
                 isCompleted: false
             }
         ]
@@ -29,6 +29,11 @@ class ToDo {
 
         if(this.isLoading) {
             this.tasksContainer.innerText = 'Loading'
+            return
+        }
+
+        if(this.tasks.length === 0) {
+            this.tasksContainer.innerText = 'No tasks to do'
             return
         }
     }
