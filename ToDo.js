@@ -19,9 +19,11 @@ class ToDo {
         this.taskContainer = document.createEelement ('div')
         this.mainContainerElement.appendChild(this.uiContainer)
         this.mainContainerElement.appendChild(this.taskContainer)
+
+        this.render()
     }
 
     render(){
-        this.containerElement.innerText = ''
+        this.tasksContainer.innerText = ''
     }
 }
