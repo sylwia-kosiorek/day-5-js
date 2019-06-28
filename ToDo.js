@@ -18,13 +18,20 @@ class ToDo {
       this.render()
     }
   
+    setState(propName, newValue) {
+        this[propName] = newValue
+
+        this.saveToDb()
+        this.render ()
+    }
+
     loadFromDb(){
       this.isLoading = true
   
       fetch('https://js-baza.firebaseio.com/test.json')
         .then(response => response.json())
         .then(value => {
-          this.tasks = value
+          this.tasks = value || []
           this.isLoading = false
           
           this.render()
