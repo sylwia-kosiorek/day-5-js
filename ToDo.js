@@ -19,22 +19,20 @@ class ToDo {
     }
   
     setState(propName, newValue) {
-        this[propName] = newValue
-
-        this.saveToDb()
-        this.render ()
-    }
-
-    loadFromDb(){
-      this.isLoading = true
+      this[propName] = newValue
   
-      fetch('https://js-baza.firebaseio.com/test.json')
+      this.saveToDb()
+      this.render()
+    }
+  
+    loadFromDb() {
+      this.setState('isLoading', true)
+  
+      fetch('https://ad-snadbox.firebaseio.com/js5day2.json')
         .then(response => response.json())
         .then(value => {
-          this.tasks = value || []
-          this.isLoading = false
-          
-          this.render()
+          this.setState('tasks', value || [])
+          this.setState('isLoading', false)
         })
     }
   
@@ -42,7 +40,7 @@ class ToDo {
       const data = JSON.stringify(this.tasks)
   
       fetch(
-        'https://js-baza.firebaseio.com/test.json',
+        'https://ad-snadbox.firebaseio.com/js5day2.json',
         {
           method: 'PUT',
           body: data
@@ -50,18 +48,30 @@ class ToDo {
       )
     }
   
+    addTask(newTaskName){
+      const newTasks = this.tasks.concat({
+        taskName: newTaskName,
+        isCompleted: false
+      })
+  
+      this.setState('tasks', newTasks)
+    }
+  
     toggleCompleted(taskIndex) {
+      // can be done better using .map to create new tasks array
+      // with one task toggled
+  
       const task = this.tasks[taskIndex]
   
       task.isCompleted = !task.isCompleted
   
-      this.render()
+      this.setState('tasks', this.tasks)
     }
   
     deleteTask(taskIndex) {
-      this.tasks = this.tasks.filter((task, index) => index !== taskIndex)
+      const newTasks = this.tasks.filter((task, index) => index !== taskIndex)
   
-      this.render()
+      this.setState('tasks', newTasks)
     }
   
     renderTask(taskName, isCompleted, taskIndex) {
