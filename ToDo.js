@@ -5,6 +5,8 @@ class ToDo {
         this.uiContainer = null
         this.tasksContainer = null
 
+        this.chart = null
+
         this.isLoading = false
         this.tasks = []
     }
@@ -16,6 +18,8 @@ class ToDo {
         this.mainContainerElement.appendChild(this.chartContainer)
         this.mainContainerElement.appendChild(this.uiContainer)
         this.mainContainerElement.appendChild(this.tasksContainer)
+
+        this.chart = new CustomChart(this.chartContainer)
 
         this.makeUI()
         this.loadFromDb()
