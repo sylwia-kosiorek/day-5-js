@@ -22,7 +22,7 @@ class Counter {
 
         btnElement.addEventListener(
             'click',
-            function () {
+            (function () {
                 this.inc()
             }).bind(this)
         )
