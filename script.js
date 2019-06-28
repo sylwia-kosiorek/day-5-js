@@ -8,6 +8,8 @@ class Counter {
 
     inc(){
         this.number = this.number + 1
+
+        this.render()
     }
 
     render(){
@@ -20,8 +22,8 @@ class Counter {
 
         btnElement.addEventListener(
             'click',
-            function (){
-                console.log('test')
+            () => {
+                this.inc()
             }
         )
 
