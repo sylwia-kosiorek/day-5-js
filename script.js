@@ -1,5 +1,6 @@
 class Counter {
-    constructor (){
+    constructor (selector){
+        this.containerElement = document.querySelector(selector)
         this.number = 0
 
         this.render()
@@ -10,19 +11,27 @@ class Counter {
     }
 
     render(){
+        this.containerElement.innerText = ''
         const headerElement = document.createElement('h1') // utworzenie elementow w HTML
         const btnElement = document.createElement('button')
 
         headerElement.innerText = this.number 
         btnElement.innerText = '+'
 
-        document.body.appendChild(headerElement)
-        document.body.appendChild(btnElement)
+        btnElement.addEventListener(
+            'click',
+            function (){
+                console.log('test')
+            }
+        )
+
+        this.containerElement.appendChild(headerElement)
+        this.containerElement.appendChild(btnElement)
     }
 }
 
-const counter1 = new Counter()
-const counter2 = new Counter()
+const counter1 = new Counter('.counter1')
+const counter2 = new Counter('.counter2')
 
 console.log(counter1)
 console.log(counter2)
