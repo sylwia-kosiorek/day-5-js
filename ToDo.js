@@ -1,10 +1,10 @@
 class ToDo {
-    constructor (selector){
+    constructor(selector) {
         this.mainContainerElement = document.querySelector(selector)
         this.uiContainer = null
-        this.taskContainer = null
+        this.tasksContainer = null
 
-        this.isloading = false
+        this.isLoading = false
         this.task = [
             {
                 taskName: 'Learn JS',
@@ -16,25 +16,44 @@ class ToDo {
     }
 
     init() {
-        this.uiContainer = document.createEelement ('div')
-        this.taskContainer = document.createEelement ('div')
+        this.uiContainer = document.createElement('div')
+        this.tasksContainer = document.createElement('div')
         this.mainContainerElement.appendChild(this.uiContainer)
-        this.mainContainerElement.appendChild(this.taskContainer)
+        this.mainContainerElement.appendChild(this.tasksContainer)
 
         this.render()
     }
 
-    render(){
+    renderTask(taskName, isCompleted) {
+        const taskElement = document.createElement('div')
+
+        taskElement.innerText = taskName
+
+        return taskElement
+    }
+
+    render() {
         this.tasksContainer.innerText = ''
 
-        if(this.isLoading) {
+        if (this.isLoading) {
             this.tasksContainer.innerText = 'Loading'
             return
         }
 
-        if(this.tasks.length === 0) {
+        if (this.tasks.length === 0) {
             this.tasksContainer.innerText = 'No tasks to do'
             return
+        }
+
+        for (let i = 0; i < this.tasks.length; i++) {
+            const task = this.tasks[i]
+            const taskName = task.taskName
+            const isCompleted = task.isCompleted
+
+            const item = this.renderTask(taskName, isCompleted)
+
+            this.tasksContainer.appendChild(item)
+
         }
     }
 }
