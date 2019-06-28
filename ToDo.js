@@ -4,6 +4,7 @@ class ToDo {
         this.uiContainer = null
         this.taskContainer = null
 
+        this.isloading = false
         this.task = [
             {
                 taskName: 'Wyniesc smieci',
@@ -25,5 +26,10 @@ class ToDo {
 
     render(){
         this.tasksContainer.innerText = ''
+
+        if(this.isLoading) {
+            this.tasksContainer.innerText = 'Loading'
+            return
+        }
     }
 }
