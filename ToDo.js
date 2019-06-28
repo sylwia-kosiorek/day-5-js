@@ -5,12 +5,7 @@ class ToDo {
       this.tasksContainer = null
   
       this.isLoading = false
-      this.tasks = [
-        {
-          taskName: 'Wynieś śmieci',
-          isCompleted: true
-        }
-      ]
+      this.tasks = []
     }
   
     init() {
@@ -19,7 +14,33 @@ class ToDo {
       this.mainContainerElement.appendChild(this.uiContainer)
       this.mainContainerElement.appendChild(this.tasksContainer)
   
+      this.loadFromDb()
       this.render()
+    }
+  
+    loadFromDb(){
+      this.isLoading = true
+  
+      fetch('https://js-baza.firebaseio.com/test.json')
+        .then(response => response.json())
+        .then(value => {
+          this.tasks = value
+          this.isLoading = false
+          
+          this.render()
+        })
+    }
+  
+    saveToDb() {
+      const data = JSON.stringify(this.tasks)
+  
+      fetch(
+        'https://js-baza.firebaseio.com/test.json',
+        {
+          method: 'PUT',
+          body: data
+        }
+      )
     }
   
     toggleCompleted(taskIndex) {
